@@ -27,7 +27,8 @@ PLUGINS: list[Plugin] = [
     Plugin("nvim-treesitter",    "https://github.com/nvim-treesitter/nvim-treesitter", "main",     "start"),
     Plugin("vim-sleuth",         "https://github.com/tpope/vim-sleuth",                "master",   "start"),
     Plugin("which-key.nvim",     "https://github.com/folke/which-key.nvim",            "main",     "start"),
-    Plugin("nvim-web-devicons",  "https://github.com/nvim-tree/nvim-web-devicons",  "master",     "start"),
+    Plugin("nvim-web-devicons",  "https://github.com/nvim-tree/nvim-web-devicons",     "master",   "start"),
+    Plugin("monokai-pro.nvim",   "https://github.com/loctvl842/monokai-pro.nvim",      "master",   "start"),
 ]
 
 
