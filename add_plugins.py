@@ -16,7 +16,7 @@ class Plugin:
 
 
 PLUGINS: list[Plugin] = [
-    Plugin("conform.nvim",    "https://github.com/stevearc/conform.nvim",           "main",   "start"),
+    Plugin("conform.nvim",    "https://github.com/stevearc/conform.nvim",           "master",   "start"),
     Plugin("fzf-lua",         "https://github.com/ibhagwan/fzf-lua",                "main",   "start"),
     Plugin("gitsigns.nvim",   "https://github.com/lewis6991/gitsigns.nvim",         "main",   "start"),
     Plugin("lualine.nvim",    "https://github.com/nvim-lualine/lualine.nvim",       "master", "start"),
