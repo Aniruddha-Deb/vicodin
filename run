@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+export XDG_CONFIG_HOME="$HERE/config"
+export XDG_DATA_HOME="$HERE/share"
+export XDG_STATE_HOME="$HERE/state"
+export XDG_CACHE_HOME="$HERE/cache"
+export NVIM_APPNAME="vicodin"
+export VIMRUNTIME="$HERE/runtime"
+export PATH=$HERE/bin:$PATH
+
+exec "$HERE/bin/nvim" "$@"
