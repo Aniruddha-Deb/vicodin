@@ -37,3 +37,11 @@ management I decided to vendor everything. It works: the folder takes ~100MB
 on disk if you exclude the `.git` folder. It still retains configurability.
 If you want a batteries-included nvim that doesn't break and can be packaged/
 installed easily without fiddling with mason/lazy this is made for that usecase.
+
+## License
+
+Vicodin is released under the MIT license.
+
+Vicodin uses external plugins under the `externals/` folder, and also vendors
+the `nvim` binary. These plugins/binaries have external licenses of their own,
+and may not fall under the license of this repository.
