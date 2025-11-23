@@ -17,15 +17,15 @@ class Plugin:
 
 PLUGINS: list[Plugin] = [
     Plugin("conform.nvim",    "https://github.com/stevearc/conform.nvim",           "master",   "start"),
-    Plugin("fzf-lua",         "https://github.com/ibhagwan/fzf-lua",                "main",   "start"),
-    Plugin("gitsigns.nvim",   "https://github.com/lewis6991/gitsigns.nvim",         "main",   "start"),
-    Plugin("lualine.nvim",    "https://github.com/nvim-lualine/lualine.nvim",       "master", "start"),
-    Plugin("LuaSnip",         "https://github.com/L3MON4D3/LuaSnip",                "master", "opt"),
-    Plugin("mini.nvim",       "https://github.com/nvim-mini/mini.nvim",             "main",   "start"),
-    Plugin("nvim-lspconfig",  "https://github.com/neovim/nvim-lspconfig",           "master", "start"),
-    Plugin("nvim-treesitter", "https://github.com/nvim-treesitter/nvim-treesitter", "main",   "start"),
-    Plugin("vim-sleuth",      "https://github.com/tpope/vim-sleuth",                "master", "start"),
-    Plugin("which-key.nvim",  "https://github.com/folke/which-key.nvim",            "main",   "start"),
+    Plugin("fzf-lua",         "https://github.com/ibhagwan/fzf-lua",                "main",     "start"),
+    Plugin("gitsigns.nvim",   "https://github.com/lewis6991/gitsigns.nvim",         "main",     "start"),
+    Plugin("lualine.nvim",    "https://github.com/nvim-lualine/lualine.nvim",       "master",   "start"),
+    Plugin("LuaSnip",         "https://github.com/L3MON4D3/LuaSnip",                "master",   "start"),
+    Plugin("mini.nvim",       "https://github.com/nvim-mini/mini.nvim",             "main",     "start"),
+    Plugin("nvim-lspconfig",  "https://github.com/neovim/nvim-lspconfig",           "master",   "start"),
+    Plugin("nvim-treesitter", "https://github.com/nvim-treesitter/nvim-treesitter", "main",     "start"),
+    Plugin("vim-sleuth",      "https://github.com/tpope/vim-sleuth",                "master",   "start"),
+    Plugin("which-key.nvim",  "https://github.com/folke/which-key.nvim",            "main",     "start"),
 ]
 
 
