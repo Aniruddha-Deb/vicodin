@@ -29,6 +29,7 @@ PLUGINS: list[Plugin] = [
     Plugin("which-key.nvim",     "https://github.com/folke/which-key.nvim",            "main",     "start"),
     Plugin("nvim-web-devicons",  "https://github.com/nvim-tree/nvim-web-devicons",     "master",   "start"),
     Plugin("monokai-pro.nvim",   "https://github.com/loctvl842/monokai-pro.nvim",      "master",   "start"),
+    Plugin("blink.cmp",          "https://github.com/saghen/blink.cmp",                "main",     "start"),
 ]
 
 

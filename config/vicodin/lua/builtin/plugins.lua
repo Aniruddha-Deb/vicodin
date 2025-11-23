@@ -1,3 +1,33 @@
+-- nvim-web-devicons
+require('nvim-web-devicons').setup()
+
+-- which-key
+require('which-key').setup({
+  delay = 1000
+})
+
+-- sleuth is autoloaded, nothing to do
+
+-- conform.nvim
+require('conform').setup({
+  formatters_by_ft = {
+    python = { "isort", "black" },
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+    cpp = { "clang-format" },
+    c = { "clang-format" }
+  },
+  default_format_opts = {
+    lsp_format = "fallback",
+  }
+  -- keystroke/autofmt config in keymaps.lua/autocmds.lua
+})
+
+-- fzf-lua
+require('fzf-lua').setup()
+
+-- gitsigns
+require('gitsigns').setup()
+
 -- monokai-pro.nvim
 require('monokai-pro').setup({
 	transparent_background = true,
@@ -44,3 +74,23 @@ require('lualine').setup {
   }
 }
 
+-- LSP
+vim.lsp.enable({
+  'lua_ls', 'clangd', 'pyright', 'ocamllsp', 'rust-analyzer', 'zls'
+})
+
+-- TreeSitter
+require('nvim-treesitter.config').setup({
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = false,
+  },
+  autotag = {
+    enable = true,
+  },
+})
+
+-- blink.cmp and luasnip
