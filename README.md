@@ -28,6 +28,7 @@ and that's it! you can now edit files with `vc <filename>`.
 
 - MacOS branch + binaries
 - Overlaying configs in ~/.config/nvim 
+- Bundling treesitter .so's
 
 ## Why Vicodin
 

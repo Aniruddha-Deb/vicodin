@@ -1,6 +1,3 @@
 state/vicodin
 cache/*
 ~cache/.gitkeep
-share/vicodin/site/parser-info/
-share/vicodin/site/parser/
-share/vicodin/site/queries/
