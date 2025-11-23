@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 import subprocess
+import argparse
 import sys
 
 
@@ -16,16 +17,17 @@ class Plugin:
 
 
 PLUGINS: list[Plugin] = [
-    Plugin("conform.nvim",    "https://github.com/stevearc/conform.nvim",           "master",   "start"),
-    Plugin("fzf-lua",         "https://github.com/ibhagwan/fzf-lua",                "main",     "start"),
-    Plugin("gitsigns.nvim",   "https://github.com/lewis6991/gitsigns.nvim",         "main",     "start"),
-    Plugin("lualine.nvim",    "https://github.com/nvim-lualine/lualine.nvim",       "master",   "start"),
-    Plugin("LuaSnip",         "https://github.com/L3MON4D3/LuaSnip",                "master",   "start"),
-    Plugin("mini.nvim",       "https://github.com/nvim-mini/mini.nvim",             "main",     "start"),
-    Plugin("nvim-lspconfig",  "https://github.com/neovim/nvim-lspconfig",           "master",   "start"),
-    Plugin("nvim-treesitter", "https://github.com/nvim-treesitter/nvim-treesitter", "main",     "start"),
-    Plugin("vim-sleuth",      "https://github.com/tpope/vim-sleuth",                "master",   "start"),
-    Plugin("which-key.nvim",  "https://github.com/folke/which-key.nvim",            "main",     "start"),
+    Plugin("conform.nvim",       "https://github.com/stevearc/conform.nvim",           "master",   "start"),
+    Plugin("fzf-lua",            "https://github.com/ibhagwan/fzf-lua",                "main",     "start"),
+    Plugin("gitsigns.nvim",      "https://github.com/lewis6991/gitsigns.nvim",         "main",     "start"),
+    Plugin("lualine.nvim",       "https://github.com/nvim-lualine/lualine.nvim",       "master",   "start"),
+    Plugin("LuaSnip",            "https://github.com/L3MON4D3/LuaSnip",                "master",   "start"),
+    Plugin("mini.nvim",          "https://github.com/nvim-mini/mini.nvim",             "main",     "start"),
+    Plugin("nvim-lspconfig",     "https://github.com/neovim/nvim-lspconfig",           "master",   "start"),
+    Plugin("nvim-treesitter",    "https://github.com/nvim-treesitter/nvim-treesitter", "main",     "start"),
+    Plugin("vim-sleuth",         "https://github.com/tpope/vim-sleuth",                "master",   "start"),
+    Plugin("which-key.nvim",     "https://github.com/folke/which-key.nvim",            "main",     "start"),
+    Plugin("nvim-web-devicons",  "https://github.com/nvim-tree/nvim-web-devicons",  "master",     "start"),
 ]
 
 
@@ -58,32 +60,34 @@ def ensure_dirs() -> None:
         (PACK_ROOT / kind).mkdir(parents=True, exist_ok=True)
 
 
-def add_and_fetch_remotes(remotes: set[str]) -> None:
+def add_and_fetch_remotes(remotes: set[str], pull: bool) -> None:
     for p in PLUGINS:
         if p.name not in remotes:
             run("git", "remote", "add", p.name, p.url)
-        run("git", "fetch", p.name)
+            run("git", "fetch", p.name)
+        elif pull:
+            run("git", "fetch", p.name)
 
 
-def update_subtrees() -> None:
+def update_or_add_subtrees(pull_updates: bool) -> None:
     for p in PLUGINS:
         prefix = EXTERNALS_DIR / p.name
+
         if prefix.exists():
-            # already present -> pull updates
-            run(
-                "git", "subtree", "pull",
+            if not pull_updates:
+                print(f"= {p.name} exists; skipping update (--pull not passed)")
+                continue
+
+            run("git", "subtree", "pull",
                 f"--prefix={prefix}",
                 p.name, p.branch,
-                "--squash",
-            )
+                "--squash")
         else:
-            # first time -> add
-            run(
-                "git", "subtree", "add",
+            run("git", "subtree", "add",
                 f"--prefix={prefix}",
                 p.name, p.branch,
-                "--squash",
-            )
+                "--squash")
+
 
 
 def ensure_symlink(src: Path, dest: Path) -> None:
@@ -115,7 +119,7 @@ def ensure_symlink(src: Path, dest: Path) -> None:
             dest.unlink()
 
     dest.symlink_to(src)
-    print(f"→ symlink {dest} -> {src}")
+    print(f"+ symlink {dest} -> {src}")
 
 
 def link_plugins() -> None:
@@ -133,17 +137,21 @@ def link_plugins() -> None:
 
 
 def main() -> None:
-    try:
-        ensure_git_repo()
-    except subprocess.CalledProcessError:
-        print("This script must be run inside a git working tree.", file=sys.stderr)
-        raise SystemExit(1)
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--pull",
+        action="store_true",
+        help="Update existing vendored dependencies (default: off)",
+    )
+    args = parser.parse_args()
+
+    ensure_git_repo()
     ensure_dirs()
 
     remotes = get_remotes()
-    add_and_fetch_remotes(remotes)
-    update_subtrees()
+    add_and_fetch_remotes(remotes, args.pull)
+    update_or_add_subtrees(args.pull)
     link_plugins()
 
 
