@@ -17,3 +17,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp', 'rust', 'javascript', 'markdown', 'html', 'css', 'ocaml', 'zig', 'java' },
+  callback = function()
+    if vim.g.ts_enabled then
+      vim.treesitter.start()
+    end
+  end,
+})
