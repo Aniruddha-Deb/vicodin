@@ -13,6 +13,10 @@ wk.add({
   { "<leader>fb", fzf.buffers,              desc = "Buffers" },
 })
 
+wk.add({
+  { "<leader>d", "<cmd>bd | bn<CR>", desc = "Delete buffer"},
+})
+
 -- Save with formatting
 local fmt_enabled = false
 
