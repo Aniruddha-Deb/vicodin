@@ -1,4 +1,3 @@
-vim.opt.termguicolors = true
 vim.opt.encoding = "utf-8"
 vim.opt.mouse = "a"
 vim.opt.inccommand = "nosplit"
@@ -17,3 +16,5 @@ vim.opt.backspace = "indent,eol,start"
 vim.opt.hlsearch = true
 vim.opt.wildmenu = true
 vim.opt.showmode = false
+
+vim.cmd.colorscheme "catppuccin"

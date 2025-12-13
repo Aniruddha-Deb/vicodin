@@ -10,8 +10,12 @@ local spec = {
     'tpope/vim-sleuth',
   },
   {
-    'mcchrish/zenbones.nvim',
-    dependencies = { 'rktjmp/lush.nvim' },
+    'catppuccin/nvim',
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      auto_integrations = true
+    }
   },
   {
     'stevearc/conform.nvim',
@@ -36,6 +40,30 @@ local spec = {
   },
   {
     'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = custom_theme,
+        component_separators = '',
+        section_separators = ''
+      },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'filetype'},
+        lualine_y = {'location'},
+        lualine_z = {'branch'}
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'filetype'},
+        lualine_y = {'location'},
+        lualine_z = {'branch'}
+      }
+    }
   },
   {
     'echasnovski/mini.nvim',

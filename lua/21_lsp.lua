@@ -117,7 +117,6 @@ end
 
 cmp.setup({
   completion = {
-    autocomplete = false,
     completeopt = "menu,menuone,noinsert",
   },
   sources = build_cmp_sources(),
