@@ -2,7 +2,7 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- LSP log rotation
-vim.lsp.set_log_level("warn")  -- Reduce logging (options: "trace", "debug", "info", "warn", "error", "off")
+-- vim.lsp.set_log_level("warn")  -- Reduce logging (options: "trace", "debug", "info", "warn", "error", "off")
 
 -- Automatically rotate log files when they exceed size limit
 local lsp_log_path = vim.lsp.get_log_path()

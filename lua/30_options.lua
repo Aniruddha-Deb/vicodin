@@ -20,3 +20,18 @@ vim.opt.showmode = false
 vim.opt.conceallevel = 2
 
 vim.cmd.colorscheme "catppuccin"
+
+-- pbcopy/pbpaste locally; OSC52 only over SSH, where there is no local clipboard
+if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+end

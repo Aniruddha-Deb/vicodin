@@ -11,6 +11,7 @@
   "mini.nvim": { "branch": "main", "commit": "7e55c3d2c04da134085a31156196836f80a89982" },
   "nvim-cmp": { "branch": "main", "commit": "d97d85e01339f01b842e6ec1502f639b080cb0fc" },
   "nvim-lspconfig": { "branch": "master", "commit": "8973916a3d015d65a8c4614e141f4270a713cf33" },
+  "nvim-tree.lua": { "branch": "master", "commit": "ca8d82fff26cb12ced239713e3222f4a9dcd0da0" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "5ca4aaa6efdcc59be46b95a3e876300cfead05ef" },
   "obsidian.nvim": { "branch": "main", "commit": "ae1f76a75c7ce36866e1d9342a8f6f5b9c2caf9b" },

@@ -24,7 +24,8 @@ local spec = {
         python = { "isort", "black" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         cpp = { "clang-format" },
-        c = { "clang-format" }
+        c = { "clang-format" },
+        rust = { "rustfmt" }
       },
       default_format_opts = {
         lsp_format = "fallback",
@@ -53,7 +54,7 @@ local spec = {
       workspaces = {
         {
           name = "Notes",
-          path = "~/Notes/Vault",
+          path = "~/Notes",
         },
       },
       ui = {
@@ -152,6 +153,12 @@ local spec = {
       "hrsh7th/cmp-path",
     },
   },
+  {
+    "nvim-tree/nvim-tree.lua",
+    config = function()
+      require('nvim-tree').setup()
+    end
+  }
 }
 
 require("lazy").setup({
