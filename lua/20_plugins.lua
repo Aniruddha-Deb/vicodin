@@ -18,6 +18,10 @@ local spec = {
     }
   },
   {
+    'esmuellert/codediff.nvim',
+    cmd = 'CodeDiff',
+  },
+  {
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
@@ -31,48 +35,6 @@ local spec = {
         lsp_format = "fallback",
       }
     }
-  },
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
-    lazy = true,
-    ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    --   -- refer to `:h file-pattern` for more examples
-    --   "BufReadPre path/to/my-vault/*.md",
-    --   "BufNewFile path/to/my-vault/*.md",
-    -- },
-    dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "Notes",
-          path = "~/Notes",
-        },
-      },
-      ui = {
-        checkboxes = {
-          -- NOTE: the 'char' value has to be a single character, and the highlight groups are defined below.
-          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-          ["x"] = { char = "󰄲", hl_group = "ObsidianDone" },
-          -- [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-          -- ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-          -- ["!"] = { char = "", hl_group = "ObsidianImportant" },
-          -- Replace the above with this if you don't have a patched font:
-          -- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
-          -- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
-
-          -- You can also add more custom ones...
-        },
-      }
-    },
   },
   {
     'ibhagwan/fzf-lua',
@@ -119,26 +81,26 @@ local spec = {
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = {
-          enable = false,
-        },
-        autotag = {
-          enable = true,
-        },
+      require('nvim-treesitter').install({
+        'cpp', 'c', 'html', 'javascript', 'java', 'json', 'lua', 'markdown',
+        'markdown_inline', 'ocaml', 'python', 'rust', 'scss', 'svelte',
+        'typescript', 'xml', 'yaml',
+      })
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          -- no-op if there's no parser for this filetype
+          pcall(vim.treesitter.start, args.buf)
+        end,
       })
     end
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    branch = 'master'
+    branch = 'main'
   },
   {
     'neovim/nvim-lspconfig'

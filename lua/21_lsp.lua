@@ -2,10 +2,10 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- LSP log rotation
--- vim.lsp.set_log_level("warn")  -- Reduce logging (options: "trace", "debug", "info", "warn", "error", "off")
+vim.lsp.log.set_level("warn")  -- Reduce logging (options: "trace", "debug", "info", "warn", "error", "off")
 
 -- Automatically rotate log files when they exceed size limit
-local lsp_log_path = vim.lsp.get_log_path()
+local lsp_log_path = vim.lsp.log.get_filename()
 local log_dir = vim.fn.fnamemodify(lsp_log_path, ':h')
 local max_log_size = 1024 * 1024  -- 1 MB in bytes
 local max_old_logs = 3  -- Keep this many old log files
@@ -83,6 +83,11 @@ vim.lsp.config['ts_ls'] = {
   capabilities = capabilities
 }
 vim.lsp.enable('ts_ls')
+
+vim.lsp.config['gopls'] = {
+  capabilities = capabilities
+}
+vim.lsp.enable('gopls')
 
 vim.lsp.config['svelte'] = {
   capabilities = capabilities

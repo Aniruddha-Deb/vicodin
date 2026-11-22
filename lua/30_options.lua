@@ -21,8 +21,14 @@ vim.opt.conceallevel = 2
 
 vim.cmd.colorscheme "catppuccin"
 
--- pbcopy/pbpaste locally; OSC52 only over SSH, where there is no local clipboard
-if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+local function is_ssh()
+    if os.getenv("WAYLAND_DISPLAY") or os.getenv("DISPLAY") then
+      return false
+    end
+    return os.getenv("SSH_TTY") ~= nil or os.getenv("SSH_CONNECTION") ~= nil
+  end
+
+if is_ssh() then
   vim.g.clipboard = {
     name = "OSC 52",
     copy = {
@@ -35,3 +41,5 @@ if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
     },
   }
 end
+
+vim.opt.clipboard = "unnamedplus"
