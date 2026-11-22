@@ -18,6 +18,10 @@ local spec = {
     }
   },
   {
+    'esmuellert/codediff.nvim',
+    cmd = 'CodeDiff',
+  },
+  {
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
@@ -53,7 +57,7 @@ local spec = {
       workspaces = {
         {
           name = "Notes",
-          path = "~/Notes/Vault",
+          path = "~/notes",
         },
       },
       ui = {
@@ -118,26 +122,26 @@ local spec = {
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = {
-          enable = false,
-        },
-        autotag = {
-          enable = true,
-        },
+      require('nvim-treesitter').install({
+        'cpp', 'c', 'html', 'javascript', 'java', 'json', 'lua', 'markdown',
+        'markdown_inline', 'ocaml', 'python', 'rust', 'scss', 'svelte',
+        'typescript', 'xml', 'yaml',
+      })
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          -- no-op if there's no parser for this filetype
+          pcall(vim.treesitter.start, args.buf)
+        end,
       })
     end
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    branch = 'master'
+    branch = 'main'
   },
   {
     'neovim/nvim-lspconfig'
